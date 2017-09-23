@@ -1,9 +1,9 @@
 package com.oop.fraccion;
 
-public class Fracción {
+public final class Fracción {
 	
-	private int numerador;
-	private int denominador;
+	private final int numerador;
+	private final int denominador;
 	
 	public Fracción(int numerador, int denominador ) {
 		if (denominador == 0){
@@ -14,42 +14,33 @@ public class Fracción {
 		this.denominador = denominador/mcd;
 	}
 	
-	private Fracción transformarMismoDenominador(int numeador,int denominador, int mcm){
-		Fracción NuevaFracción = new Fracción(((mcm /denominador) * numerador),mcm);
-		return NuevaFracción;
-	}
-	private Fracción operar(Fracción otra, String signo){
-		int mcm = Utilidades.devuelveMcm(this.denominador, otra.denominador);		
-		Fracción fraccionUnoNueva =  transformarMismoDenominador(this.numerador, this.denominador,mcm);
-		Fracción fraccionDosNueva =  transformarMismoDenominador(otra.getNumerador(),otra.getDenominador(), mcm);
+	private Fracción operar(Fracción otra){
+		int mcm = Utilidades.devuelveMcm(this.denominador, otra.denominador);	
+		int numeradorUno = (mcm /this.denominador) * this.numerador;
+		int numeradorDos = (mcm /otra.getDenominador()) * otra.getNumerador();
+		Fracción fraccionUnoNueva =  new Fracción(numeradorUno,mcm);
+		Fracción fraccionDosNueva =  new Fracción(numeradorDos,mcm);
 		Fracción fracciónResultado;
-		if (signo.equals("+")){
-			 fracciónResultado = new Fracción((fraccionUnoNueva.numerador + fraccionDosNueva.numerador), mcm);
-		}else {
-			 fracciónResultado = new Fracción((fraccionUnoNueva.numerador - fraccionDosNueva.numerador), mcm);
-		}
+		fracciónResultado = new Fracción((fraccionUnoNueva.numerador + fraccionDosNueva.numerador), mcm);
 		return fracciónResultado;
 	}
 	
+	public Fracción opuesta (Fracción otra){
+		return new Fracción(otra.numerador * - 1 , denominador);
+	}
+	
 	public Fracción sumar (Fracción otra){
+		return operar(otra);
+	}
+	
+	public Fracción restar (Fracción otra){
+		return operar(otra.opuesta(otra));
+	}
+	
+	public String toString() {
+		return this.denominador == 1 ? String.valueOf(this.numerador) : this.numerador + "/" + this.denominador;
+	}
 		
-		return operar(otra, "+");
-	}
-	
-	public Fracción Restar (Fracción otra){
-		return operar(otra, "-");
-	}
-	
-	public String toString(){
-		String fracción = ""; 
-		if (this.denominador == 1){
-			fracción = String.valueOf(this.numerador);
-		}else{
-			fracción = this.numerador + "/" + this.denominador;
-		}
-		return fracción;
-	}
-	
 	public int getNumerador() {
 		return numerador;
 	}
