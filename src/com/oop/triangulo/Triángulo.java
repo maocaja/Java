@@ -1,70 +1,29 @@
 package com.oop.triangulo;
 
-public class Triángulo {
+public final class Triángulo {
 	
-	private Lado ladoA;
-	private Lado ladoB;
-	private Lado ladoC;
-	private Angulo anguloA;
-	private Angulo anguloB;
-	private Angulo anguloC;
+	private final Angulo anguloA;
+	private final Angulo anguloB;
+	private final Angulo anguloC;
+	private final Lado ladoA;
+	private final Lado ladoB;
+	private final Lado ladoC;
 	
-	public Triángulo(Lado ladoA, Lado ladoB, Lado ladoC) {
-		
-		this.ladoA = ladoA;
-		this.ladoB = ladoB;
-		this.ladoC = ladoC;
-		
+	private Triángulo(Builder builder) {
+		this.anguloA = builder.anguloA;
+		this.anguloB = builder.anguloB;
+		this.anguloC = builder.anguloC;
+		this.ladoA   = builder.ladoA;
+		this.ladoB   = builder.ladoB;
+		this.ladoC   = builder.ladoC;
 	}
 	
-    public Triángulo(Lado ladoA, Lado ladoB, Angulo anguloA) {
-		
-		this.ladoA = ladoA;
-		this.ladoB = ladoB;
-		this.anguloA = anguloA;
-		
+	public Angulo getAnguloA() {
+		return anguloA;
 	}
-    
-    public Triángulo(Lado ladoA, Angulo anguloA, Angulo anguloB) {
-    	
-		this.ladoA = ladoA;
-		this.anguloA = anguloA;
-		this.anguloB = anguloB;
-		
-	}
-    
-    public Triángulo(Lado ladoA, Lado ladoB,Angulo anguloA, Angulo anguloB) {
-    	
-		this.ladoA = ladoA;
-		this.anguloA = anguloA;
-		this.ladoB = ladoB;
-		this.anguloB = anguloB;
-		
-	}
-    
-    public Triángulo(Lado ladoA, Lado ladoB,Angulo anguloA, Angulo anguloB, Angulo anguloC) {
-    	
-		this.ladoA = ladoA;
-		this.anguloA = anguloA;
-		this.ladoB = ladoB;
-		this.anguloB = anguloB;
-		this.anguloC = anguloC;
-		
-	}
-    
-    public Triángulo(Lado ladoA, Lado ladoB, Lado ladoC, Angulo anguloA) {
-		
-		this.ladoA = ladoA;
-		this.ladoB = ladoB;
-		this.ladoC = ladoC;
-		this.anguloA = anguloA;
-		
-	}
-    
 	public Lado getLadoA() {
 		return ladoA;
 	}
-
 	public Lado getLadoB() {
 		return ladoB;
 	}
@@ -72,16 +31,52 @@ public class Triángulo {
 	public Lado getLadoC() {
 		return ladoC;
 	}
-
-	public Angulo getAnguloA() {
-		return anguloA;
-	}
-
 	public Angulo getAnguloB() {
 		return anguloB;
 	}
 
 	public Angulo getAnguloC() {
 		return anguloC;
-	}	
+	}
+	 
+	public static class Builder{
+		
+		private final Angulo anguloA; // mandatory
+		private Angulo anguloB; 
+		private Angulo anguloC; 
+		private final Lado ladoA;
+		private Lado ladoB;
+		private Lado ladoC;
+		
+		public Builder(Angulo anguloA, Lado ladoA) { // constructor of static class Builder
+			this.anguloA = anguloA;
+			this.ladoA = ladoA;
+		}
+		
+		public Builder anguloB(Angulo anguloA) {
+			this.anguloB = anguloA;
+		    return this;
+		}
+		
+		public Builder anguloC(Angulo anguloC) {
+			this.anguloB = anguloA;
+		    return this;
+		}
+		
+		
+		public Builder ladoB(Lado lado) {
+			this.ladoB = lado;
+		    return this;
+		}
+		
+		public Builder ladoC(Lado lado) {
+			this.ladoC = lado;
+		    return this;
+		}
+		
+		public Triángulo build() {
+		    return new Triángulo(this);
+		}
+		
+	}
 }

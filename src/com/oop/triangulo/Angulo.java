@@ -1,26 +1,34 @@
 package com.oop.triangulo;
 
-public class Angulo {
-	private String nombre;
-	private double grados;
-	
-	public Angulo(String nombre, double grados){
-		
-		if(grados < 0 || grados > 180   ||nombre.isEmpty() ){
-			throw new ArithmeticException("EL angulo de un triangulo no puede ser menor que cero");
+public final class Angulo {
+	private final Unidad unidad;
+	private final double angulo;	
+
+	public Angulo(Unidad unidad, int angulo) {
+		switch (unidad) {
+			case GRADOS:
+				this.angulo = Utilidades.calcularAnguloEnGrados(angulo);
+				break;
+			case RADIAN:        	
+				this.angulo = 0; // esta pendiente de hacer
+				break;
+			default:
+        	 this.angulo = 0;
 		}
-		this.nombre = nombre;
-		this.grados = grados;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public double getGrados() {
-		return grados;
+		this.unidad = unidad;	
 	}
 	
+	public String toString(){
+		return "Unidades:" + this.unidad + " angulo:" + this.angulo; 
+	}
 	
+	public Unidad getUnidad() {
+		return unidad;
+	}
+
+	public double getAngulo() {
+		return angulo;
+	}
+
 
 }

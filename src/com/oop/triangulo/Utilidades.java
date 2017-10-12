@@ -6,6 +6,25 @@ public final class Utilidades {
 		throw new UnsupportedOperationException("Not instanciable class!");
 	}
 	
+	public static final double calcularAnguloEnGrados(double angulo){
+		
+		double anguloCalculado = 0;
+		
+		int numVueltas = (int)(angulo / 360);
+		
+		if (numVueltas != 0){
+			anguloCalculado = angulo - (numVueltas * 360) ;
+		}else{
+			anguloCalculado = angulo;
+		}
+		
+		if (anguloCalculado < 0){
+			anguloCalculado = 360 + (anguloCalculado);
+	   	}
+		
+		return anguloCalculado;
+	}
+	
 	public static final double calcularLeyCosenoAnguloA(double ladoA, double ladoB, double ladoC){
 		return Math.toDegrees(Math.acos((Math.pow(ladoA, 2) - Math.pow(ladoB, 2) - Math.pow(ladoC, 2))/(-2 * ladoB * ladoC )));
 	}
