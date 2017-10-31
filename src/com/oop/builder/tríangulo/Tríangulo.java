@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import com.co.tríangulo.LeyCoseno;
 import com.co.tríangulo.LeySeno;
 
-public class Tríangulo {
+public final class Tríangulo {
 	
 	private final Angulo anguloA;
 	private final Angulo anguloB;
