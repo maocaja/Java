@@ -7,8 +7,6 @@ import java.util.Properties;
 
 public class Plano {
 	
-	private String nombre ;
-	private String autor;
 	private int generaciones;
 	private int filas;
 	private int columnas;
@@ -18,9 +16,8 @@ public class Plano {
 		try {
 			Properties propiedades = new Properties();
 			URL url = ClassLoader.getSystemResource("properties/archivo.propierties");
+			//URL url = ClassLoader.getSystemResource("/archivo.propierties");
 			propiedades.load(url.openStream());
-			nombre = propiedades.getProperty("nombreJuego");
-			autor = propiedades.getProperty("autor");
 			generaciones = Integer.parseInt(propiedades.getProperty("generaciones"));
 			filas = Integer.parseInt(propiedades.getProperty("filas"));
 			columnas = Integer.parseInt(propiedades.getProperty("columnas"));
@@ -32,13 +29,6 @@ public class Plano {
 		}
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getAutor() {
-		return autor;
-	}
 
 	public int getGeneraciones() {
 		return generaciones;
@@ -55,5 +45,4 @@ public class Plano {
 	public String getMundoInicial() {
 		return mundoInicial;
 	}
- 
 }
